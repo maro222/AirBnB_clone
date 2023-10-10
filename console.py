@@ -3,6 +3,7 @@
 import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -30,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(line) > 0 and line not in HBNBCommand.list_of_classes:
             print("** class doesn't exist **")
         else:
-            ins = eval(f"{line}()")
+            ins = eval(line)()
             ins.save()
             print(ins.id)
 
@@ -41,9 +42,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(arr) == 1:
             if (arr[0] not in HBNBCommand.list_of_classes):
                 print("** class doesn't exist **")
-            elif(len(arr) != 2):
-                print("** instance id missing **")
+            print("** instance id missing **")
         elif (len(arr) == 2):
+            if (arr[0] not in HBNBCommand.list_of_classes):
+                print("** class doesn't exist **")
             for key, value in FileStorage().all().items():
                 if f"{arr[0]}.{arr[1]}" == key:
                     print(value)
@@ -63,12 +65,12 @@ class HBNBCommand(cmd.Cmd):
             for key, value in FileStorage().all().items():
                 isFound = False
                 if (f"{arr[0]}.{arr[1]}" == key):
-                    del FileStorage().all()[key]
-                    FileStorage().save()
+                    del storage.all()[key]
+                    storage.save()
                     isFound = True
                     break
-                if (isFound == False):
-                    print("** no instance found **")
+            if (isFound == False):
+                print("** no instance found **")
 
     def do_all(self, line):
         arr = line.split()

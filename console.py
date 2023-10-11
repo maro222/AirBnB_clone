@@ -105,10 +105,10 @@ class HBNBCommand(cmd.Cmd):
         elif (len(arr) == 3):
             print("** value missing **")
         else:
-            if arr[3].isdigit():
-                value_edit = int(arr[3])
-            elif arr[3][-1] == '"' and arr[3][0] == '"':
+            if arr[3][0] == '"':
                 value_edit = arr[3][1:-1]
+            elif arr[3].isdigit():
+                value_edit = int(arr[3])
             else:
                 value_edit = arr[3]
                 for key, value in FileStorage().all().items():

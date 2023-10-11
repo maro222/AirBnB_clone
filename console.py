@@ -3,11 +3,17 @@
 import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
-    list_of_classes = ["BaseModel"]
+    list_of_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Amenity", "Review"]
     def do_EOF(self, line):
         """EOF is to exit else"""
         print()

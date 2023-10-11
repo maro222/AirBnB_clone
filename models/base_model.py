@@ -20,10 +20,11 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self) -> str:
-        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.now()
+
         storage.save()
 
     def to_dict(self):

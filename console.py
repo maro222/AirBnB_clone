@@ -117,6 +117,37 @@ class HBNBCommand(cmd.Cmd):
                         FileStorage().save()
                         break
 
+    def default(self, line):
+        emptyArr = []
+        i = 0
+        if '.' in line:
+            arr_of_line = line.split(".")
+            if (arr_of_line[0] in HBNBCommand.list_of_classes):
+                if (arr_of_line[1] == "all()"):
+                    for key, value in FileStorage().all().items():
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0]  == original_class):
+                            emptyArr.append(str(value))
+                    print(emptyArr)
+                elif (arr_of_line[1] == "count()"):
+                        for key, value in FileStorage().all().items():
+                            helper = key.split(".")
+                            original_class = helper[0]
+                            if (arr_of_line[0]  == original_class):
+                                i += 1
+                        print(i)
+                elif (arr_of_line[1][0:4] == "show"):
+                    spec_id = arr_of_line[1][6:-2]
+                    for key, value in FileStorage().all().items():
+                            helper = key.split(".")
+                            original_class = helper[0]
+                            if (arr_of_line[0]  == original_class):
+                                if (getattr(value, "id") == spec_id):
+                                    emptyArr.append(str(value))
+                                    print(emptyArr)
+                    print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

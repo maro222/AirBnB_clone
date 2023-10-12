@@ -11,9 +11,12 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
-    list_of_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Amenity", "Review"]
+    list_of_classes = ["BaseModel", "User", "State", "City", "Amenity",
+                       "Place", "Amenity", "Review"]
+
     def do_EOF(self, line):
         """EOF is to exit else"""
         print()
@@ -30,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, line):
         """help to show all commanda"""
         return super().do_help(line)
-    
+
     def do_create(self, line):
         if len(line) == 0:
             print("** class name missing **")
@@ -75,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                     isFound = True
                     break
-            if (isFound == False):
+            if (isFound is False):
                 print("** no instance found **")
 
     def do_all(self, line):
@@ -127,42 +130,42 @@ class HBNBCommand(cmd.Cmd):
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0]  == original_class):
+                        if (arr_of_line[0] == original_class):
                             emptyArr.append(str(value))
                     print(emptyArr)
                 elif (arr_of_line[1] == "count()"):
-                        for key, value in FileStorage().all().items():
-                            helper = key.split(".")
-                            original_class = helper[0]
-                            if (arr_of_line[0]  == original_class):
-                                i += 1
-                        print(i)
+                    for key, value in FileStorage().all().items():
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0] == original_class):
+                            i += 1
+                    print(i)
                 elif (arr_of_line[1][0:4] == "show"):
                     is_found = False
                     spec_id = arr_of_line[1][6:-2]
                     for key, value in FileStorage().all().items():
-                            helper = key.split(".")
-                            original_class = helper[0]
-                            if (arr_of_line[0]  == original_class):
-                                if (getattr(value, "id") == spec_id):
-                                    emptyArr.append(str(value))
-                                    print(emptyArr)
-                                    is_found = True
-                    if is_found == False:
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0] == original_class):
+                            if (getattr(value, "id") == spec_id):
+                                emptyArr.append(str(value))
+                                print(emptyArr)
+                                is_found = True
+                    if is_found is False:
                         print("** no instance found **")
                 elif (arr_of_line[1][0:7] == "destory"):
                     is_found = False
                     spec_id = arr_of_line[1][9:-2]
                     for key, value in FileStorage().all().items():
-                            helper = key.split(".")
-                            original_class = helper[0]
-                            if (arr_of_line[0]  == original_class):
-                                if (getattr(value, "id") == spec_id):
-                                    del storage.all()[key]
-                                    storage.save()
-                                    is_found = True
-                                    break
-                    if (is_found == False):
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0] == original_class):
+                            if (getattr(value, "id") == spec_id):
+                                del storage.all()[key]
+                                storage.save()
+                                is_found = True
+                                break
+                    if (is_found is False):
                         print("** no instance found **")
                 elif (arr_of_line[1][0:6] == "update"):
                     is_found = False
@@ -171,18 +174,17 @@ class HBNBCommand(cmd.Cmd):
                     dic_for_update = eval(anoth_arr[1][1:-1])
                     print(spec_id)
                     for key, value in FileStorage().all().items():
-                            helper = key.split(".")
-                            original_class = helper[0]
-                            if (arr_of_line[0]  == original_class):
-                                if (getattr(value, "id") == spec_id):
-                                    is_found = True
-                                    for k, v in dic_for_update.items():
-                                        setattr(value, k, v)
-                                    storage.save()
-                                    break
-                    if is_found == False:
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0] == original_class):
+                            if (getattr(value, "id") == spec_id):
+                                is_found = True
+                                for k, v in dic_for_update.items():
+                                    setattr(value, k, v)
+                                storage.save()
+                                break
+                    if is_found is False:
                         print("** no instance found **")
-
 
 
 if __name__ == '__main__':

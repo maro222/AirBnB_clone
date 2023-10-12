@@ -18,8 +18,8 @@ class FileStorage:
     def save(self):
         with open(self.__file_path, "w", encoding="utf-8") as file:
             dic = {}
-            for key in self.__objects.keys():
-                dic[key] = self.__objects[key].to_dict()
+            for key, value in self.__objects.items():
+                dic[key] = value.to_dict()
             json.dump(dic, file)
 
     def reload(self):

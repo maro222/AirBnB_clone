@@ -167,12 +167,11 @@ class HBNBCommand(cmd.Cmd):
                                 break
                     if (is_found is False):
                         print("** no instance found **")
-                elif (arr_of_line[1][0:6] == "update"):
+                elif (arr_of_line[1][0:6] == "update" and arr_of_line[1][-2] == "}"):
                     is_found = False
                     anoth_arr = arr_of_line[1].split(",", 1)
                     spec_id = anoth_arr[0][8:-1]
                     dic_for_update = eval(anoth_arr[1][1:-1])
-                    print(spec_id)
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
@@ -185,7 +184,27 @@ class HBNBCommand(cmd.Cmd):
                                 break
                     if is_found is False:
                         print("** no instance found **")
-
+                elif (arr_of_line[1][0:6] == "update" and arr_of_line[1][-2] != "}"):
+                    is_found = False
+                    anoth_arr = arr_of_line[1].split(",", 2)
+                    spec_id = anoth_arr[0][8:-1]
+                    k = anoth_arr[1][2:-1]
+                    v = anoth_arr[2][1:-1]
+                    for key, value in FileStorage().all().items():
+                        helper = key.split(".")
+                        original_class = helper[0]
+                        if (arr_of_line[0] == original_class):
+                            if (getattr(value, "id") == spec_id):
+                                is_found = True
+                                if (v[0] == '"'):
+                                    v = v[1:-1]
+                                elif (v.isdigit()):
+                                    v = int(v)
+                                setattr(value, k, v)
+                                storage.save()
+                                break
+                    if is_found is False:
+                        print("** no instance found **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

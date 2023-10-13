@@ -124,16 +124,17 @@ class HBNBCommand(cmd.Cmd):
         if line == "" or not line:
             print("** class name missing **")
         else:
-            arg = line.split('.')
+            arg = line.split()
             if arg[0] not in list_of_classes:
-                print("** class dosenot exist")
+                print("** class dosenot exist **")
             else:
                 count = 0
                 for key in storage.all().keys():
-                    key = key.split('.')
-                    if key == arg:
-                        cout += 1
+                    k = key.split('.')
+                    if k[0] == arg[0]:
+                        count += 1
                 print(count)
+
 
     def default(self, line):
         emptyArr = []

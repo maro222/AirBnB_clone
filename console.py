@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             arg = line.split()
-            if arg[0] not in list_of_classes:
+            if arg[0] not in HBNBCommand.list_of_classes:
                 print("** class dosenot exist **")
             else:
                 count = 0

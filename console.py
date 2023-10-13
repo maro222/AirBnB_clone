@@ -120,6 +120,21 @@ class HBNBCommand(cmd.Cmd):
                         FileStorage().save()
                         break
 
+    def do_count(self, line):
+        if line == "" or not line:
+            print("** class name missing **")
+        else:
+            arg = line.split('.')
+            if arg[0] not in list_of_classes:
+                print("** class dosenot exist")
+            else:
+                count = 0
+                for key in storage.all().keys():
+                    key = key.split('.')
+                    if key == arg:
+                        cout += 1
+                print(count)
+
     def default(self, line):
         emptyArr = []
         i = 0

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""base model parent of all classes"""
 
 from datetime import *
 import uuid
@@ -6,6 +7,8 @@ from . import storage
 
 
 class BaseModel:
+    """BaseModel class for all classes"""
+
     def __init__(self, *args, **kwargs):
         if len(kwargs.keys()) != 0:
             for key in kwargs.keys():
@@ -23,11 +26,15 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """save method to save in file"""
+
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self) -> dict:
+        """to_dict method for trans to ..."""
+
         dic = dict(self.__dict__)
         dic['__class__'] = self.__class__.__name__
         dic['updated_at'] = datetime.isoformat(dic.get('updated_at'))

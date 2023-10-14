@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destory(self, line):
         """destory to delete spacfic instance"""
 
-        arr = line.split()
+        arr = line.split(" ")
         if (len(arr) == 0):
             print("** class name missing **")
         elif (len(arr) == 1):

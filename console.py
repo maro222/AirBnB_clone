@@ -122,7 +122,14 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** instance id missing **")
         elif (len(arr) == 2):
-            print("** attribute name missing **")
+            isFound = False
+            for key, value in FileStorage().all().items():
+                if (f"{arr[0]}.{arr[1]}" == key):
+                    isFound = True
+                    print("** attribute name missing **")
+                    break
+            if (isFound is False):
+                print("** no instance found **")
         elif (len(arr) == 3):
             print("** value missing **")
         else:

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""base model parent of all classes"""
+"""base model Moudle parent of all classes"""
 
 from datetime import *
 import uuid
@@ -7,7 +7,7 @@ from . import storage
 
 
 class BaseModel:
-    """BaseModel class for all classes"""
+    """BaseModel Class for all classes"""
 
     def __init__(self, *args, **kwargs):
         if len(kwargs.keys()) != 0:
@@ -33,7 +33,7 @@ class BaseModel:
         storage.save()
 
     def to_dict(self) -> dict:
-        """to_dict method for trans to ..."""
+        """to_dict method for return aft trans to ..."""
 
         dic = dict(self.__dict__)
         dic['__class__'] = self.__class__.__name__

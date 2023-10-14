@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ command prompt like shell """
+
+
 import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
@@ -14,29 +16,35 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """cmd command Cmd prompt like shell"""
+
     prompt = "(hbnb) "
     list_of_classes = ["BaseModel", "User", "State", "City", "Amenity",
                        "Place", "Amenity", "Review"]
 
     def do_EOF(self, line):
         """EOF is to exit else"""
+
         print()
         return True
 
     def do_quit(self, line):
         """ Quit command to exit the program """
+
         return True
 
     def emptyline(self):
         """emptyline pass"""
+
         pass
 
     def do_help(self, line):
         """help to show all commanda"""
+
         return super().do_help(line)
 
     def do_create(self, line):
         """create to create new instance"""
+
         if len(line) == 0:
             print("** class name missing **")
         elif len(line) > 0 and line not in HBNBCommand.list_of_classes:
@@ -48,6 +56,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """show to show spacfic instance"""
+
         arr = line.split()
         if len(line) == 0:
             print("** class name missing **")
@@ -66,6 +75,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destory(self, line):
         """destory to delete spacfic instance"""
+
         arr = line.split()
         if (len(arr) == 0):
             print("** class name missing **")
@@ -86,7 +96,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, line):
-        "all to obj with spacfic shape"
+        """all to obj with spacfic shape"""
+
         arr = line.split()
         emptyArr = []
         for key, value in FileStorage().all().items():
@@ -101,6 +112,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """update to update one of value or add one"""
+
         arr = line.split()
         if (len(arr) == 0):
             print("** class name missing **")
@@ -128,6 +140,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, line):
         """count to count numbers of spacfic ins of Class"""
+
         if line == "" or not line:
             print("** class name missing **")
         else:
@@ -144,6 +157,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """default to any thing without above"""
+
         emptyArr = []
         i = 0
         if '.' in line:

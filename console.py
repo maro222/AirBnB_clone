@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+""" command prompt like shell """
 import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
@@ -13,6 +13,7 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
+    """cmd command Cmd prompt like shell"""
     prompt = "(hbnb) "
     list_of_classes = ["BaseModel", "User", "State", "City", "Amenity",
                        "Place", "Amenity", "Review"]
@@ -35,6 +36,7 @@ class HBNBCommand(cmd.Cmd):
         return super().do_help(line)
 
     def do_create(self, line):
+        """create to create new instance"""
         if len(line) == 0:
             print("** class name missing **")
         elif len(line) > 0 and line not in HBNBCommand.list_of_classes:
@@ -45,6 +47,7 @@ class HBNBCommand(cmd.Cmd):
             print(ins.id)
 
     def do_show(self, line):
+        """show to show spacfic instance"""
         arr = line.split()
         if len(line) == 0:
             print("** class name missing **")
@@ -62,6 +65,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destory(self, line):
+        """destory to delete spacfic instance"""
         arr = line.split()
         if (len(arr) == 0):
             print("** class name missing **")
@@ -82,6 +86,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, line):
+        "all to obj with spacfic shape"
         arr = line.split()
         emptyArr = []
         for key, value in FileStorage().all().items():
@@ -95,6 +100,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, line):
+        """update to update one of value or add one"""
         arr = line.split()
         if (len(arr) == 0):
             print("** class name missing **")
@@ -121,6 +127,7 @@ class HBNBCommand(cmd.Cmd):
                         break
 
     def do_count(self, line):
+        """count to count numbers of spacfic ins of Class"""
         if line == "" or not line:
             print("** class name missing **")
         else:
@@ -135,47 +142,47 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                 print(count)
 
-
     def default(self, line):
+        """default to any thing without above"""
         emptyArr = []
         i = 0
         if '.' in line:
-            arr_of_line = line.split(".")
-            if (arr_of_line[0] in HBNBCommand.list_of_classes):
-                if (arr_of_line[1] == "all()"):
+            a_line = line.split(".")
+            if (a_line[0] in HBNBCommand.list_of_classes):
+                if (a_line[1] == "all()"):
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             emptyArr.append(str(value))
                     print(emptyArr)
-                elif (arr_of_line[1] == "count()"):
+                elif (a_line[1] == "count()"):
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             i += 1
                     print(i)
-                elif (arr_of_line[1][0:4] == "show"):
+                elif (a_line[1][0:4] == "show"):
                     is_found = False
-                    spec_id = arr_of_line[1][6:-2]
+                    spec_id = a_line[1][6:-2]
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             if (getattr(value, "id") == spec_id):
                                 emptyArr.append(str(value))
                                 print(emptyArr)
                                 is_found = True
                     if is_found is False:
                         print("** no instance found **")
-                elif (arr_of_line[1][0:7] == "destory"):
+                elif (a_line[1][0:7] == "destory"):
                     is_found = False
-                    spec_id = arr_of_line[1][9:-2]
+                    spec_id = a_line[1][9:-2]
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             if (getattr(value, "id") == spec_id):
                                 del storage.all()[key]
                                 storage.save()
@@ -183,15 +190,15 @@ class HBNBCommand(cmd.Cmd):
                                 break
                     if (is_found is False):
                         print("** no instance found **")
-                elif (arr_of_line[1][0:6] == "update" and arr_of_line[1][-2] == "}"):
+                elif (a_line[1][0:6] == "update" and a_line[1][-2] == "}"):
                     is_found = False
-                    anoth_arr = arr_of_line[1].split(",", 1)
+                    anoth_arr = a_line[1].split(",", 1)
                     spec_id = anoth_arr[0][8:-1]
                     dic_for_update = eval(anoth_arr[1][1:-1])
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             if (getattr(value, "id") == spec_id):
                                 is_found = True
                                 for k, v in dic_for_update.items():
@@ -200,16 +207,16 @@ class HBNBCommand(cmd.Cmd):
                                 break
                     if is_found is False:
                         print("** no instance found **")
-                elif (arr_of_line[1][0:6] == "update" and arr_of_line[1][-2] != "}"):
+                elif (a_line[1][0:6] == "update" and a_line[1][-2] != "}"):
                     is_found = False
-                    anoth_arr = arr_of_line[1].split(",", 2)
+                    anoth_arr = a_line[1].split(",", 2)
                     spec_id = anoth_arr[0][8:-1]
                     k = anoth_arr[1][2:-1]
                     v = anoth_arr[2][1:-1]
                     for key, value in FileStorage().all().items():
                         helper = key.split(".")
                         original_class = helper[0]
-                        if (arr_of_line[0] == original_class):
+                        if (a_line[0] == original_class):
                             if (getattr(value, "id") == spec_id):
                                 is_found = True
                                 if (v[0] == '"'):
@@ -225,6 +232,7 @@ class HBNBCommand(cmd.Cmd):
                     cmd.Cmd.default(self, line)
             else:
                 cmd.Cmd.default(self, line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

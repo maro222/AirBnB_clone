@@ -40,5 +40,5 @@ class FileStorage:
                 dic = json.load(file)
                 for value in dic.values():
                     self.new(funcs[value['__class__']](**value))
-        except FileExistsError:
+        except file:
             pass

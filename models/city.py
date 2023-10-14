@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-""" Module to get the BaseModel"""
+""" Module to get the BaseModel."""
 
 
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """Class City inherits from BaseModel"""
+    """Class City inherits from BaseModel."""
 
     state_id = ""
     name = ""

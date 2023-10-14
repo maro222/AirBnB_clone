@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""state module"""
+""" Module to get the BaseModel"""
 
 
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """State class"""
+    """Class State inherits from BaseModel"""
     name = ""

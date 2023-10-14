@@ -18,8 +18,7 @@ class FileStorage:
         """add a new obj to __objects"""
 
         objClassName = obj.__class__.__name__
-        objId = obj.id
-        self.__objects[f"{objClassName}.{objId}"] = obj
+        self.__objects[f"{objClassName}.{obj.id}"] = obj
 
     def save(self):
         """ sets in __objects the obj"""

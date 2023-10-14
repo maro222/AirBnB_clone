@@ -27,8 +27,8 @@ class BaseModel:
         storage.new(self)
         storage.save()
 
-    def to_dict(self):
-        dic = self.__dict__
+    def to_dict(self) -> dict:
+        dic = dict(self.__dict__)
         dic['__class__'] = self.__class__.__name__
         dic['updated_at'] = datetime.isoformat(dic.get('updated_at'))
         dic['created_at'] = datetime.isoformat(dic.get('created_at'))

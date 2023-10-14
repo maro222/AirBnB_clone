@@ -35,10 +35,10 @@ class FileStorage:
         funcs = {"BaseModel": BaseModel, "User": User, "Place": Place,
                   "Amenity": Amenity, "City": City, "Review": Review,
                   "State": State}
-        if os.path.exists(self.__file_path):
+        try:
             with open(self.__file_path, "r", encoding="utf-8") as file:
                 dic = json.load(file)
                 for value in dic.values():
                     self.new(funcs[value['__class__']](**value))
-        else:
+        except FileExistsError:
             pass

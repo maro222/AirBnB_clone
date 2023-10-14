@@ -221,6 +221,10 @@ class HBNBCommand(cmd.Cmd):
                                 break
                     if is_found is False:
                         print("** no instance found **")
+                else:
+                    cmd.Cmd.default(self, line)
+            else:
+                cmd.Cmd.default(self, line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

@@ -17,18 +17,16 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """cmd command Cmd prompt like shell"""
 
-    prompt = "(hbnb) "
+    prompt = '(hbnb)'
     list_of_classes = ["BaseModel", "User", "State", "City", "Amenity",
                        "Place", "Amenity", "Review"]
 
     def do_EOF(self, line):
         """EOF is to exit else"""
-
-        print()
         return True
 
     def do_quit(self, line):
-        """ Quit command to exit the program """
+        """Quit command to exit the program."""
 
         return True
 

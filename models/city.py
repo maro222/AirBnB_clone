@@ -10,12 +10,3 @@ class City(BaseModel):
 
     state_id = ""
     name = ""
-
-    def __init__(self, *args, **kwargs):
-        """Instance Constructor.
-
-        args
-        name : string city name
-        state_id : string State.id
-        """
-        super().__init__(*args, **kwargs)

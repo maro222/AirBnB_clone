@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
 import json
-import os
+
 
 class FileStorage:
+
     __file_path = 'file.json'
     __objects = {}
 
@@ -31,10 +32,9 @@ class FileStorage:
         from models.amenity import Amenity
         from models.review import Review
 
-
         funcs = {"BaseModel": BaseModel, "User": User, "Place": Place,
-                  "Amenity": Amenity, "City": City, "Review": Review,
-                  "State": State}
+                 "Amenity": Amenity, "City": City, "Review": Review,
+                 "State": State}
         try:
             with open(self.__file_path, "r", encoding="utf-8") as file:
                 dic = json.load(file)

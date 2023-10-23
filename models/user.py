@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""user Module"""
+"""Module to take from the BaseModel."""
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    """class user"""
+    """Class User inheri...ted fr...om BaseModel."""
     email = ""
     password = ""
     first_name = ""

@@ -11,21 +11,19 @@ def setUpModule():
     sleep(0.1)
     obj2 = BaseModel()
 
+
 class testBaseModel_instaniation(unittest.TestCase):
     """ unittest class for instaniation for BaseModel """
 
     def test_BaseModelType(self):
         self.assertEqual(BaseModel, type(BaseModel()))
 
-    
     def test_created_at_type(self):
         self.assertEqual(datetime, type(BaseModel().created_at))
 
-    
     def test_created_at_type(self):
         self.assertEqual(datetime, type(BaseModel().updated_at))
 
-    
     def test_id(self):
         self.assertEqual(str, type(BaseModel().id))
 
@@ -33,7 +31,7 @@ class testBaseModel_instaniation(unittest.TestCase):
         self.assertNotEqual(obj.id, obj2.id)
 
     def test_obj_created_at(self):
-       self.assertNotEqual(obj.created_at, obj2.created_at)
+        self.assertNotEqual(obj.created_at, obj2.created_at)
 
     def test_obj_updated_at(self):
         self.assertNotEqual(obj.updated_at, obj2.updated_at)
@@ -51,9 +49,8 @@ class testBaseModel_instaniation(unittest.TestCase):
     def test_kwargs(self):
         date = datetime(2017, 9, 28, 21, 3, 54, 52302)
         temp = BaseModel({'id': "20210597",
-                        'created_at': date.isoformat(),
-                        'updated_at': date.isoformat()
-                        })
+                         'created_at': date.isoformat(),
+                          'updated_at': date.isoformat()})
         self.assertEqual(temp.id, "20210597")
         self.assertEqual(temp.created_at,  date.isoformat())
         self.assertEqual(temp.updated_at,  date.isoformat())
@@ -67,15 +64,15 @@ class testBaseModel_instaniation(unittest.TestCase):
 
 class testBaseModel_str_presentation(unittest.TestCase):
     """ class test string presentation """
-    
+
     @unittest.skip("peoblem with id")
     def test_str_representation(self):
-        date =  datetime(2017, 9, 28, 21, 3, 54, 52302)
+        date = datetime(2017, 9, 28, 21, 3, 54, 52302)
         temp = BaseModel({'id': "20210597",
-                        'created_at': date.isoformat(),
-                        'updated_at': date.isoformat()
-                        })
-        self.assertEqual(f"[BaseModel] {temp.id} {temp.__dict__}", temp.__str__())
+                         'created_at': date.isoformat(),
+                          'updated_at': date.isoformat()})
+        stri = date.__str__()
+        self.assertEqual(f"[BaseModel] {temp.id} {temp.__dict__}", stri)
 
 
 class testBAseModel_save(unittest.TestCase):
@@ -86,12 +83,14 @@ class testBAseModel_save(unittest.TestCase):
         sleep(0.01)
         obj.save()
         self.assertLess(dt, obj.updated_at)
+    
     @unittest.skip("problem with save()")
     def test_sav_file(self):
         dt = obj.updated_at
         sleep(0.01)
         obj.save()
         self.assertLess(dt, list(storage.all().values())[0]['updated_at'])
+
     @unittest.skip("problem with save()")
     def test_wrong_para(self):
         with self.assertRaises(TypeError):
@@ -100,4 +99,5 @@ class testBAseModel_save(unittest.TestCase):
 
 class testBAseModel_to_dict():
     """class tests to_dict functtion"""
+    pass
 
